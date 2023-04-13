@@ -21,15 +21,19 @@ const testpaperSchema = new mongoose.Schema({
     type: String,
     required: [true, "please provide the option"],
   },
+  answer: {
+    type: Number,
+    required: [true, "please provide the answer for the above question"],
+  },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    required: false,
+    required: true,
   },
-  createdAt:{
+  createdAt: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 module.exports = mongoose.model("TestPaper", testpaperSchema);

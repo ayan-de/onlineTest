@@ -2,11 +2,15 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    createquestion
+    addQuestion,
+    getAllQuestion
 } = require("../controllers/testpaperController");
 
-// const { isLoggedIn, customRole } = require("../middlewares/user");
+const { isLoggedIn, customRole } = require("../middlewares/user");
 
-router.route("/createquestion").post(createquestion);
+//admin route
+router.route("/addQuestion").post(isLoggedIn, customRole("admin"),addQuestion);
+router.route("/getAllQuestion").get(isLoggedIn,getAllQuestion);
+
 
 module.exports = router;
