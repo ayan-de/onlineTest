@@ -1,25 +1,22 @@
 const TestPaper = require("../models/testPaper");
+const User = require("../models/user");
 const BigPromise = require("../middlewares/bigPromise");
 const CustomError = require("../utils/customError");
 const WhereClause = require("../utils/whereClasuse");
+const user = require("../models/user");
 
 exports.addQuestion = BigPromise(async (req, res, next) => {
-  const { question, optionOne, optionTwo, optionThree, optionFour, answer } = req.body;
+  const { question, optionOne, optionTwo, optionThree, optionFour, answer } =
+    req.body;
 
-  // let answerArray = [];
-
-  // if(!req.answers){
-  //   return next(new CustomError(`Please provide answers for all questons`, 401));
-  // }
-
-  // if(req.answers){
-  //   for (let index = 0; index < req.answers.length; index++) {
-  //     answerArray.push(req.answers)
-      
-  //   }
-  // }
-
-  if (!question || !optionOne || !optionTwo || !optionThree || !optionFour || !answer) {
+  if (
+    !question ||
+    !optionOne ||
+    !optionTwo ||
+    !optionThree ||
+    !optionFour ||
+    !answer
+  ) {
     return next(new CustomError("All fields are required", 400));
   }
 
@@ -35,7 +32,6 @@ exports.addQuestion = BigPromise(async (req, res, next) => {
 });
 
 exports.getAllQuestion = BigPromise(async (req, res, next) => {
-
   let resultperPage = 1;
   let totalcountQuestion = await TestPaper.countDocuments();
 
@@ -57,6 +53,50 @@ exports.getAllQuestion = BigPromise(async (req, res, next) => {
   });
 });
 
-exports.getResult = BigPromise(async (req, res, next)  => {
-  
-})
+exports.getResult = BigPromise(async (req, res, next) => {
+  const { answers } = req.body;
+
+  let totalcountQuestion = await TestPaper.countDocuments();
+  let marks = 0;
+  // const attempted = 0;
+  // const notAttempted = 0;
+  // const correctAnswer = 0;
+  // const incorrectAnswer = 0;
+
+  for (let index = 0; index < totalcountQuestion; index++) {
+
+    let userAnswer = answers[index];
+    // Query for the document containing the correct answer
+    let correctAnswerDoc = await TestPaper.findOne({
+      QuestionNumber: index+1,
+    });
+
+    // Compare the user's answer with the correct answer
+    if (userAnswer === correctAnswerDoc.answer) {
+      marks = marks+1;
+    }
+  }
+  req.body.user = req.user.id;
+  let id = req.body.user;
+  // console.log( id);
+
+  await User.findByIdAndUpdate({_id:id},{
+    $set : {
+      result : marks
+    },
+  })
+
+  res.status(200).json({
+    success: true,
+    marks,
+  });
+});
+
+exports.adminGetAllQuestion = BigPromise(async (req, res, next) => {
+  const testPaper = await TestPaper.find({});
+
+  res.status(200).json({
+    success: true,
+    testPaper,
+  });
+});
