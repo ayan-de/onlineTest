@@ -6,15 +6,12 @@ const WhereClause = require("../utils/whereClasuse");
 const user = require("../models/user");
 
 exports.addQuestion = BigPromise(async (req, res, next) => {
-  const { question, optionOne, optionTwo, optionThree, optionFour, answer } =
+  const { question, options, answer } =
     req.body;
 
   if (
     !question ||
-    !optionOne ||
-    !optionTwo ||
-    !optionThree ||
-    !optionFour ||
+    !options ||
     !answer
   ) {
     return next(new CustomError("All fields are required", 400));
