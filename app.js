@@ -5,6 +5,9 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require('./middlewares/Error')
 
+//handling cors error
+app.use(cors())
+
 //regular middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
