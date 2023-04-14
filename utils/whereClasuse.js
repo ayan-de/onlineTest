@@ -34,8 +34,10 @@ class WhereClause{
         //convert bigQ into a string => copyQ
         let stringOfCopyQ = JSON.stringify(copyQ)
 
-        stringOfCopyQ = stringOfCopyQ.replace(/\b(gte|lte|gt|lt)\b/g, m => `$${m}`)
-      //stringOfCopyQ = stringOfCopyQ.replace(/                   /g, m => `$${m}`)
+        if(stringOfCopyQ)
+        {
+            stringOfCopyQ = stringOfCopyQ.replace(/\b(gte|lte|gt|lt)\b/g, m => `$${m}`)
+        }
 
 
         const jsonOfCopyQ = JSON.parse(stringOfCopyQ)
