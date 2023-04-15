@@ -11,10 +11,6 @@ exports.signup = BigPromise(async (req, res, next) => {
 
   const { name, email, password } = req.body;
 
-  console.log(name);
-  console.log(email);
-  console.log(password);
-
   if (!email || !name || !password) {
     return next(new CustomError("Name, email and password are required", 400));
   }
