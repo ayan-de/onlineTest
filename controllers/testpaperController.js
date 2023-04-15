@@ -60,12 +60,12 @@ exports.getResult = BigPromise(async (req, res, next) => {
   // const correctAnswer = 0;
   // const incorrectAnswer = 0;
 
-  for (let index = 0; index < totalcountQuestion; index++) {
+  for (let index = 1; index <= totalcountQuestion; index++) {
 
     let userAnswer = answers[index];
     // Query for the document containing the correct answer
     let correctAnswerDoc = await TestPaper.findOne({
-      QuestionNumber: index+1,
+      QuestionNumber: index,
     });
 
     // Compare the user's answer with the correct answer
