@@ -13,7 +13,7 @@ const cookieToken = (user, res, message) => {
     user.password = undefined;
     res.status(200).cookie('token', token, options).json({
         success: true,
-        // token, //token not sending in backend(POSTMAN)
+        token, //token not sending in backend(POSTMAN)
         user,
         message,
     });
