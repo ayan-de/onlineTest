@@ -11,12 +11,12 @@ const {
 const { isLoggedIn, customRole } = require("../middlewares/user");
 
 //admin route
-router.route("/addQuestion").post(addQuestion);
-router.route("/adminGetAllQuestion").get(adminGetAllQuestion);
+router.route("/addQuestion").post(isLoggedIn,customRole('admin'),addQuestion);
+router.route("/adminGetAllQuestion").get(isLoggedIn,customRole('admin'),adminGetAllQuestion);
 
 //user route
-router.route("/getAllQuestion").get(getAllQuestion);
-router.route("/getResult").post(getResult);
+router.route("/getAllQuestion").get(isLoggedIn,getAllQuestion);
+router.route("/getResult").post(isLoggedIn,getResult);
 
 
 module.exports = router;
