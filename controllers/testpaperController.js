@@ -79,15 +79,15 @@ exports.getResult = BigPromise(async (req, res, next) => {
     }
     ansIndex = ansIndex+1;
   }
-  req.body.user = req.user.id;
-  let id = req.body.user;
+  //req.body.user = req.user.id;
+  //let id = req.body.user;
   // console.log( id);
 
-  await User.findByIdAndUpdate({_id:id},{
-    $set : {
-      result : marks
-    },
-  })
+  // await User.findByIdAndUpdate({_id:id},{
+  //   $set : {
+  //     result : marks
+  //   },
+  // })
 
   res.status(200).json({
     success: true,

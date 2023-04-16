@@ -16,7 +16,7 @@ router.route("/adminGetAllQuestion").get(adminGetAllQuestion);
 
 //user route
 router.route("/getAllQuestion").get(getAllQuestion);
-router.route("/getResult").post(isLoggedIn,getResult);
+router.route("/getResult").post(getResult);
 
 
 module.exports = router;
