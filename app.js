@@ -17,6 +17,11 @@ const corsConfig = {
 //handling cors error
 app.use(cors(corsConfig))
 
+
+//regular middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //cookie session
 app.use(
   cookieSession({
@@ -25,9 +30,6 @@ app.use(
   })
 );
 
-//regular middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 //cookies and file middleware
 app.use(cookieParser());
