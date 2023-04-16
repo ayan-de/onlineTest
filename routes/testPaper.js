@@ -8,15 +8,15 @@ const {
     getResult
 } = require("../controllers/testpaperController");
 
-const { isLoggedIn, customRole } = require("../middlewares/user");
+const { customRole } = require("../middlewares/user");
 
 //admin route
-router.route("/addQuestion").post(isLoggedIn, customRole("admin"),addQuestion);
-router.route("/adminGetAllQuestion").get(isLoggedIn, customRole("admin"),adminGetAllQuestion);
+router.route("/addQuestion").post(addQuestion);
+router.route("/adminGetAllQuestion").get(adminGetAllQuestion);
 
 //user route
-router.route("/getAllQuestion").get(isLoggedIn,getAllQuestion);
-router.route("/getResult").post(isLoggedIn,getResult);
+router.route("/getAllQuestion").get(getAllQuestion);
+router.route("/getResult").post(getResult);
 
 
 module.exports = router;
