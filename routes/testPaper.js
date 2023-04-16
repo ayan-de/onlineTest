@@ -15,8 +15,8 @@ router.route("/addQuestion").post(isLoggedIn,customRole('admin'),addQuestion);
 router.route("/adminGetAllQuestion").get(isLoggedIn,customRole('admin'),adminGetAllQuestion);
 
 //user route
-router.route("/getAllQuestion").get(isLoggedIn,getAllQuestion);
-router.route("/getResult").post(isLoggedIn,getResult);
+router.route("/getAllQuestion").get(getAllQuestion);
+router.route("/getResult").post(getResult);
 
 
 module.exports = router;
