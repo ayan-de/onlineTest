@@ -5,9 +5,25 @@ const cors = require('cors')
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require('./middlewares/Error')
+const cookieSession = require("cookie-session");
+
+
+const corsConfig = {
+  credentials: true,
+  origin: process.env.PORT2,
+  
+};
 
 //handling cors error
-app.use(cors())
+app.use(cors(corsConfig))
+
+//cookie session
+app.use(
+  cookieSession({
+    maxAge: 3 * 24 * 60 * 60 * 1000,
+    keys: ["thisislcotokenkey"], // dotenv
+  })
+);
 
 //regular middleware
 app.use(express.json());
