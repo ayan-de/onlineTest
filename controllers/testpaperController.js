@@ -56,6 +56,7 @@ exports.getResult = BigPromise(async (req, res, next) => {
 
   const ansParse = JSON.parse(answers)
   let totalcountQuestion = await TestPaper.countDocuments();
+  console.log("total",totalcountQuestion);
   let marks = 0;
   // const attempted = 0;
   // const notAttempted = 0;

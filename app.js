@@ -6,6 +6,8 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require('./middlewares/Error')
 const cookieSession = require("cookie-session");
+const bodyParser = require('body-parser');
+
 
 
 const corsConfig = {
@@ -16,6 +18,9 @@ const corsConfig = {
 
 //handling cors error
 app.use(cors(corsConfig))
+
+
+app.use(bodyParser.json());
 
 
 //regular middleware
