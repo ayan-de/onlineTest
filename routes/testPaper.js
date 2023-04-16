@@ -11,8 +11,8 @@ const {
 const { isLoggedIn, customRole } = require("../middlewares/user");
 
 //admin route
-router.route("/addQuestion").post(isLoggedIn,customRole('admin'),addQuestion);
-router.route("/adminGetAllQuestion").get(isLoggedIn,customRole('admin'),adminGetAllQuestion);
+router.route("/addQuestion").post(addQuestion);
+router.route("/adminGetAllQuestion").get(adminGetAllQuestion);
 
 //user route
 router.route("/getAllQuestion").get(getAllQuestion);
