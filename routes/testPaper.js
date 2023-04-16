@@ -15,7 +15,7 @@ router.route("/addQuestion").post(addQuestion);
 router.route("/adminGetAllQuestion").get(adminGetAllQuestion);
 
 //user route
-router.route("/getAllQuestion").get(isLoggedIn,getAllQuestion);
+router.route("/getAllQuestion").get(getAllQuestion);
 router.route("/getResult").post(isLoggedIn,getResult);
 
 
