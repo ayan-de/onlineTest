@@ -51,8 +51,10 @@ exports.getAllQuestion = BigPromise(async (req, res, next) => {
 });
 
 exports.getResult = BigPromise(async (req, res, next) => {
+
   const { answers } = req.body;
 
+  const ansParse = JSON.parse(answers)
   let totalcountQuestion = await TestPaper.countDocuments();
   let marks = 0;
   // const attempted = 0;
@@ -60,18 +62,22 @@ exports.getResult = BigPromise(async (req, res, next) => {
   // const correctAnswer = 0;
   // const incorrectAnswer = 0;
 
+  let ansIndex = 1;
   for (let index = 1; index <= totalcountQuestion; index++) {
 
-    let userAnswer = answers[index];
+    let userAnswer = ansParse[ansIndex];
+    console.log('1',userAnswer);
     // Query for the document containing the correct answer
     let correctAnswerDoc = await TestPaper.findOne({
       QuestionNumber: index,
     });
-
+    console.log(correctAnswerDoc.answer);
     // Compare the user's answer with the correct answer
     if (userAnswer === correctAnswerDoc.answer) {
+      //console.log(`1 ${userAnswer} and ${correctAnswerDoc.answer}`);
       marks = marks+1;
     }
+    ansIndex = ansIndex+1;
   }
   req.body.user = req.user.id;
   let id = req.body.user;
