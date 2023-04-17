@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 
 const corsConfig = {
   credentials: true,
-  origin: process.env.PORT2,
+  origin: "https://online-test-one.vercel.app/",
   
 };
 
